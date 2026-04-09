@@ -20,7 +20,7 @@ def user_search(data):
         return {"Message": "User not found."}
     user_list = []
     for user in users:
-        user_list.append({"nomeUsu": user.nomeUsu, "usuId": user.usuId})
+        user_list.append({"nomeUsu": user.nomeUsu, "usuId": user.usuId, "email": user.email})
     return user_list
 
 # User can only delete their own user so it's a direct approach
@@ -32,4 +32,4 @@ def user_delete(data):
     else:
         db.session.delete(user)
         db.session.commit()
-        return {"Message": "User deleted successfully"}
+        return {"Message": "User deleted successfully."}

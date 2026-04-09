@@ -11,8 +11,8 @@ def register_user(body: User_Creation):
         result = user_creation(body)
         return result, 200
     except Exception as e:
-        return(f"Error: {str(e)}"), 400
-       # return {"Message": "Error creating user."}, 400
+        print(f"Error: {str(e)}"), 400
+        return {"Message": "Error creating user."}, 400
 
 @bp_user.get('/usuarios', tags=[user_tag])
 def search_user(query: User_Search):
@@ -20,8 +20,8 @@ def search_user(query: User_Search):
         result = user_search(query)
         return result, 200
     except Exception as e: 
-        return(f"Error: {str(e)}"), 400
-       # return {"Message": "User not found."}, 400
+        print(f"Error: {str(e)}"), 400
+        return {"Message": "User not found."}, 400
     
 @bp_user.delete('/usuario', tags=[user_tag])
 def delete_user(body: User_Delete):

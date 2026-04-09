@@ -22,7 +22,7 @@ def list_schedules(data):
         return {"Message": "Schedule not found."}
     else:
         for schedule in schedules:
-            schedules_list.append({"nomeAtiv": schedule.atividade.nomeAtiv, "data_hora": schedule.data_hora, "descAgen": schedule.descAgen})
+            schedules_list.append({"nomeAtiv": schedule.atividade.nomeAtiv, "data_hora": schedule.data_hora, "descAgen": schedule.descAgen, 'agenId': schedule.agenId})
         return schedules_list
         
     

@@ -12,13 +12,18 @@ def create_activity(data):
     return {"Message": "Activity created successfully!"}
 
 def search_activity(data):
-    activities = db.session.execute(db.select(Atividade).where(Atividade.nomeAtiv == data.name)).scalars().all()
+    query = db.select(Atividade)
+    if data.name:
+        query = query.where(Atividade.nomeAtiv == data.name)
+    if data.user_id:
+        query = query.where(Atividade.criadorId == data.user_id)
+    activities = db.session.execute(query).scalars().all()
     activity_list = []
     if not activities:
         return {"Message": "Activity not found."}
     else:
         for activity in activities:
-            activity_list.append({"nomeAtiv": activity.nomeAtiv, "ativId": activity.ativId})
+            activity_list.append({"nomeAtiv": activity.nomeAtiv, "ativId": activity.ativId, "descAtiv": activity.descAtiv})
         return activity_list
     
 def delete_activity(data):

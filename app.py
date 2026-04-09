@@ -1,4 +1,5 @@
 from flask_openapi3 import OpenAPI, Info
+from flask_cors import CORS
 from database import db
 from routes.usuario import bp_user
 from routes.participante import bp_participant
@@ -10,6 +11,7 @@ from routes.agendamento import bp_schedule
 info = Info(title="Shared_Agenda API", version="1.0.0")
 
 app = OpenAPI(__name__, info=info)
+CORS(app)
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
 db.init_app(app)

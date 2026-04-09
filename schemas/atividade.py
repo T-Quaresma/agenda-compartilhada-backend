@@ -10,7 +10,8 @@ class Activity_Creation(BaseModel):
 
 # To search an activity the user will search the activity by it's name, generating every activity with that key name to the selection list.
 class Activity_Search(BaseModel):
-    name: str
+    name: Optional[str] = None
+    user_id: Optional[int] = None
 
 # Deleting an activity the user will have to enter the activity and click the option to delete that specific activity. The front will 
 # use that activity id to delete the selected one.
