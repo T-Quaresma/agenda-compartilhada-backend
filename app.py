@@ -5,7 +5,7 @@ from routes.usuario import bp_user
 from routes.participante import bp_participant
 from routes.atividade import bp_activity
 from routes.agendamento import bp_schedule
-
+from routes.grupo import bp_group
 
 
 info = Info(title="Shared_Agenda API", version="1.0.0")
@@ -22,6 +22,7 @@ app.register_api(bp_user)
 app.register_api(bp_participant)
 app.register_api(bp_activity)
 app.register_api(bp_schedule)
+app.register_api(bp_group)
 
 with app.app_context():
     db.create_all()
