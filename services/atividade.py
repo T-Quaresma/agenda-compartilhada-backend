@@ -52,6 +52,6 @@ def update_activity(data):
         if data.image:
             activity.imagem = data.image
         if data.group_id:
-            activity.groupId = data.group_id
+            activity.grupoId = data.group_id
         db.session.commit()
         return {"Message": "Activity updated sucessfully!"}

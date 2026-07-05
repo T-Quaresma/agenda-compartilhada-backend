@@ -8,7 +8,8 @@ I-------------------------------------------------------------------------------
 Project Discription
 
 API for managing shared appointments between users.
-Allows the user to create activities, add appointments and share them with other users.
+Allows the user to create activities, add schedules and share them with other users.
+Activities can be organized into groups, and schedules support date, time, location and frequency settings.
 
 I------------------------------------------------------------------------------------------I
 
@@ -53,22 +54,31 @@ User
 
 POST | Register a new user
 GET | Search for a user through their name
-DELETE  | Delete the user
+DELETE | Delete the user
+
+Group
+
+POST | Register a new activity group with optional avatar
+GET | Search for groups by user or group id
+PUT | Update a group name and avatar
+DELETE | Delete a group (does not delete activities inside it)
 
 Activity
 
-POST | Register a new activity
-GET | Search for an activity through their names
+POST | Register a new activity linked to a user and optionally to a group
+GET | Search for an activity by name, user id, activity id or group id
+PUT | Update an activity name, description, image and group
 DELETE | Delete an activity
 
 Schedule
 
-POST | Register a new schedule to an existing activity
-GET | makes an automatic list of all schedules to appear when you access an activity
+POST | Register a new schedule linked to an existing activity, with name, description, start and end date, start and end time, location and frequency
+GET | Search for schedules by activity id or schedule id
+PUT | Update a schedule fields
 DELETE | Delete a schedule
 
 Participant
 
 POST | Register a user to an existing activity from another user
-GET | Search for registered users that are concidered participants
+GET | Search for registered users that are considered participants
 DELETE | Remove a participant from the activity
