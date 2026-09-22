@@ -6,7 +6,6 @@ from typing import Optional
 class Activity_Creation(BaseModel):
     name: str
     description: Optional[str] = None
-    user_id: int
     image: Optional[str] = None
     group_id: Optional[int] = None
     
@@ -14,7 +13,6 @@ class Activity_Creation(BaseModel):
 # To search an activity the user will search the activity by it's name, generating every activity with that key name to the selection list.
 class Activity_Search(BaseModel):
     name: Optional[str] = None
-    user_id: Optional[int] = None
     activity_id: Optional[int] = None
     group_id: Optional[int] = None
 

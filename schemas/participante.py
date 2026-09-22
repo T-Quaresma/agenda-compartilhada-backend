@@ -8,7 +8,7 @@ class Participant_Addition(BaseModel):
 
 # ao procurar por um participante só precisará procurar o nome do participante, se ele existir ele aparecera para a pessoa procurando
 class Participant_Search(BaseModel):
-    user_name: str
+    schedule_id: int
     
 # Para deletar um participante o usuario ira clicar no participante especifico que ele quer e clicar em remover.
 class Participant_Delete(BaseModel):

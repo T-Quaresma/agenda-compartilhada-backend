@@ -32,7 +32,7 @@ class Atividade(db.Model):
     grupo: Mapped["Grupo"] = relationship("Grupo", back_populates="atividades")
     
 class Agendamento(db.Model):
-    __tablename__ = 'agendamentos'
+    __tablename__ = 'agendamentos' 
     agenId: Mapped[int] = mapped_column(primary_key=True)
     nomeAgen: Mapped[str] = mapped_column(nullable=False)
     descAgen: Mapped[str] = mapped_column(nullable=True)
@@ -52,3 +52,4 @@ class ParticipantesAtiv(db.Model):
     usuId: Mapped[int] = mapped_column(ForeignKey("usuarios.usuId"))
     agenId: Mapped[int] = mapped_column(ForeignKey("agendamentos.agenId"))
     usuario: Mapped["Usuario"] = relationship("Usuario", back_populates="participantesAtiv")
+

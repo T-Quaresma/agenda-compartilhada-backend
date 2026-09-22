@@ -16,3 +16,7 @@ class User_Search(BaseModel):
 class User_Delete(BaseModel):
     id: int
 
+#para fazer a autenticação do usuario, ele tera que colocar o email e a senha cadastrada na conta.
+class User_Auth(BaseModel):
+    email: str
+    senha: str
