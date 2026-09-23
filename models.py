@@ -17,8 +17,9 @@ class Grupo(db.Model):
     grupoId: Mapped[int] = mapped_column(primary_key=True)
     nomeGrupo: Mapped[str] = mapped_column(nullable=False)
     criadorId: Mapped[int] = mapped_column(ForeignKey("usuarios.usuId"))
-    atividades: Mapped[List["Atividade"]] = relationship("Atividade", back_populates="grupo")
+    atividades: Mapped[List["Atividade"]] = relationship("Atividade", back_populates="grupo", cascade="all, delete-orphan")
     imagem: Mapped[str] = mapped_column(nullable=True)
+    
 
 class Atividade(db.Model):
     __tablename__ = 'atividades'
@@ -26,7 +27,7 @@ class Atividade(db.Model):
     descAtiv: Mapped[str]
     ativId: Mapped[int] = mapped_column(primary_key=True)
     criadorId: Mapped[int] = mapped_column(ForeignKey("usuarios.usuId"))
-    agendamento: Mapped[List["Agendamento"]] = relationship("Agendamento", back_populates="atividade")
+    agendamento: Mapped[List["Agendamento"]] = relationship("Agendamento", back_populates="atividade", cascade="all, delete-orphan")
     imagem: Mapped[str] = mapped_column(nullable=True)
     grupoId: Mapped[int] = mapped_column(ForeignKey("grupos.grupoId"), nullable=True)
     grupo: Mapped["Grupo"] = relationship("Grupo", back_populates="atividades")
@@ -44,6 +45,7 @@ class Agendamento(db.Model):
     hora_inicio: Mapped[time] = mapped_column(nullable=True)
     hora_fim: Mapped[time] = mapped_column(nullable=True)
     frequencia: Mapped[str] = mapped_column(nullable=True)
+    participantes: Mapped[List["ParticipantesAtiv"]] = relationship("ParticipantesAtiv", back_populates="agendamento", cascade="all, delete-orphan")
 
 
 class ParticipantesAtiv(db.Model):
@@ -52,4 +54,5 @@ class ParticipantesAtiv(db.Model):
     usuId: Mapped[int] = mapped_column(ForeignKey("usuarios.usuId"))
     agenId: Mapped[int] = mapped_column(ForeignKey("agendamentos.agenId"))
     usuario: Mapped["Usuario"] = relationship("Usuario", back_populates="participantesAtiv")
+    agendamento: Mapped["Agendamento"] = relationship("Agendamento", back_populates="participantes")
 
