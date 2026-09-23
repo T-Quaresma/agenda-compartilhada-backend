@@ -11,7 +11,7 @@ from routes.cep import cep_bp
 
 
 
-info = Info(title="Shared_Agenda API", version="1.0.0")
+info = Info(title="Sharp API", version="1.0.0")
 
 app = OpenAPI(__name__, info=info)
 CORS(app,
@@ -36,7 +36,7 @@ with app.app_context():
 
 if __name__ == '__main__':
     app.run(
-        debug=True,
+        debug=False,
         host="0.0.0.0",
         port=5000
     )
