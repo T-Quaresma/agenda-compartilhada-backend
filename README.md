@@ -134,35 +134,35 @@ The SHARP Authentication API must also be running on port 5001 for authenticated
 
 **1. Clone the repository:**
 
-git clone https://github.com/T-Quaresma/agenda-compartilhada-backend
+  git clone https://github.com/T-Quaresma/agenda-compartilhada-backend
 
 **2. Go to the project directory:**
 
-cd agenda-compartilhada-backend
+  cd agenda-compartilhada-backend
 
 **3. Create a virtual environment:**
 
-py -m venv venv
+  py -m venv venv
 
 **4. Activate the virtual environment:**
 
-source venv/Scripts/activate
+  source venv/Scripts/activate
 
 **5. Install the dependencies:**
 
-pip install -r requirements.txt
+  pip install -r requirements.txt
 
 **6. Start the Principal API:**
 
-py app.py
+  py app.py
 
 **The Principal API will be available at:**
 
-http://localhost:5000
+  http://localhost:5000
 
 **Swagger documentation will be available at:**
 
-http://localhost:5000/openapi/swagger
+  http://localhost:5000/openapi/swagger
 
 The SQLite database is created automatically by the application.
 
@@ -180,19 +180,19 @@ The Authentication API must also be available for authenticated routes to work.
 
 **1. Clone the repository:**
 
-git clone https://github.com/T-Quaresma/agenda-compartilhada-backend
+  git clone https://github.com/T-Quaresma/agenda-compartilhada-backend
 
 **2. Enter the project directory:**
 
-cd agenda-compartilhada-backend
+  cd agenda-compartilhada-backend
 
 **3. Build the Docker image:**
 
-docker build -t sharp-principal .
+  docker build -t sharp-principal .
 
 **4. Create the Docker network used by the SHARP APIs:**
 
-docker network create sharp-network
+  docker network create sharp-network
 
 The Principal API and Authentication API use this network to communicate with each other through their container names.
 
@@ -200,7 +200,7 @@ If the network already exists, it does not need to be created again.
 
 **5. Create a Docker volume for the SQLite database:**
 
-docker volume create sharp-database
+  docker volume create sharp-database
 
 This volume keeps the SQLite database even if the Principal API container is stopped or removed.
 
@@ -208,37 +208,37 @@ This volume keeps the SQLite database even if the Principal API container is sto
 
 Using Git Bash on Windows:
 
-MSYS_NO_PATHCONV=1 docker run -d --name sharp-principal \
-  --network sharp-network \
-  -p 5000:5000 \
-  -e AUTH_API_URL=http://sharp-auth:5001 \
-  -v sharp-database:/app/instance \
-  sharp-principal
+  MSYS_NO_PATHCONV=1 docker run -d --name sharp-principal \
+    --network sharp-network \
+    -p 5000:5000 \
+    -e AUTH_API_URL=http://sharp-auth:5001 \
+    -v sharp-database:/app/instance \
+    sharp-principal
 
 **The parameters used in this command are:**
 
---name sharp-principal  
+  --name sharp-principal  
 Defines the name of the container.
 
---network sharp-network  
+  --network sharp-network  
 Connects the container to the SHARP Docker network.
 
--p 5000:5000  
+  -p 5000:5000  
 Makes the Principal API available through port 5000.
 
--e AUTH_API_URL=http://sharp-auth:5001  
+  -e AUTH_API_URL=http://sharp-auth:5001  
 Defines the address used by the Principal API to communicate with the Authentication API.
 
--v sharp-database:/app/instance  
+  -v sharp-database:/app/instance  
 Stores the SQLite database inside the persistent Docker volume.
 
 **The Principal API will be available at:**
 
-http://localhost:5000
+  http://localhost:5000
 
 **Swagger documentation will be available at:**
 
-http://localhost:5000/openapi/swagger
+  http://localhost:5000/openapi/swagger
 
 **Important:**
 
@@ -252,29 +252,29 @@ I-------------------------------------------------------------------------------
 
 **To view running containers:**
 
-docker ps
+  docker ps
 
 **To view all containers:**
 
-docker ps -a
+  docker ps -a
 
 **To view Docker images:**
 
-docker images
+  docker images
 
 **To stop the Principal API:**
 
-docker stop sharp-principal
+  docker stop sharp-principal
 
 **To start the existing Principal API container again:**
 
-docker start sharp-principal
+  docker start sharp-principal
 
 **To stop and remove the Principal API container:**
 
-docker stop sharp-principal
+  docker stop sharp-principal
 
-docker rm sharp-principal
+  docker rm sharp-principal
 
 Removing the container does not remove the SQLite data stored in the `sharp-database` Docker volume.
 
@@ -335,23 +335,6 @@ DELETE | Remove a participant from a schedule
 
 GET | Search for address information using a Brazilian CEP through the ViaCEP external API
 
-
-I------------------------------------------------------------------------------------------I
-
-## External API
-
-The SHARP Principal API integrates with ViaCEP to retrieve address information from Brazilian postal codes.
-
-The CEP route receives an 8-digit CEP and sends a request to ViaCEP.
-
-**The data returned by ViaCEP is processed by the Principal API and returns:**
-
-- Street
-- Neighborhood
-- City
-- State
-
-The frontend uses this information to help fill the location field when creating or editing schedules.
 
 I------------------------------------------------------------------------------------------I
 
