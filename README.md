@@ -32,6 +32,12 @@ Docker
 
 I------------------------------------------------------------------------------------------I
 
+## Project Architecture Display
+
+The following diagram illustrates the architecture and communication between the components of the Sharp application:
+
+![Sharp Architecture Diagram](/docs/sharp-architecture.png)
+
 ## Project Architecture
 
 SHARP is composed of three developed components and one external API:
@@ -55,15 +61,60 @@ SHARP is composed of three developed components and one external API:
 - Responsible for registration, login, JWT validation, token refresh and logout.
 - Communicates with the Principal API to register users and verify credentials.
 
-**External API**
-- ViaCEP.
-- Used to retrieve address information from Brazilian postal codes.
+## External API
 
-## Project Architecture
+Sharp integrates with ViaCEP, a free Brazilian postal code (CEP) web service.
 
-The following diagram illustrates the architecture and communication between the components of the Sharp application:
+The integration is handled by the Principal API. The Frontend sends a CEP to the Sharp endpoint, and the Principal API communicates with ViaCEP to retrieve the corresponding address information.
 
-![Sharp Architecture Diagram](/docs/sharp-architecture.png)
+**External Service:**
+
+ViaCEP
+
+**Official Website:**
+
+https://viacep.com.br/
+
+**Endpoint Used:**
+
+GET https://viacep.com.br/ws/{cep}/json/
+
+**Authentication / Registration:**
+
+The ViaCEP web service can be accessed directly without an API key in the integration used by Sharp.
+
+**Data Used by Sharp:**
+
+The response returned by ViaCEP is processed by the Principal API. Sharp uses the following address information:
+
+- Street (`logradouro`)
+- Neighborhood (`bairro`)
+- City (`localidade`)
+- State (`uf`)
+
+The Principal API maps this information to the format used by the application before returning it to the Frontend.
+
+**Integration Flow:**
+
+Frontend → Principal API → ViaCEP → Principal API → Frontend
+
+The returned address remains editable by the user before the schedule is created.
+
+**Error Handling:**
+
+Sharp validates that the CEP contains 8 digits before requesting ViaCEP.
+
+According to the ViaCEP documentation:
+
+- Invalid CEP formats result in an HTTP 400 response.
+- A valid but nonexistent CEP returns a response containing `"erro": true`.
+
+Sharp handles these cases before returning the result to the Frontend.
+
+**Documentation:**
+
+https://viacep.com.br/
+
 
 I------------------------------------------------------------------------------------------I
 
