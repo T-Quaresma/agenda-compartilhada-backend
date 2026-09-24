@@ -134,7 +134,7 @@ The SHARP Authentication API must also be running on port 5001 for authenticated
 
 **1. Clone the repository:**
 
-  git clone https://github.com/T-Quaresma/agenda-compartilhada-backend
+  git clone https://github.com/T-Quaresma/agenda-compartilhada-backend/tree/mvp3
 
 **2. Go to the project directory:**
 
@@ -180,7 +180,7 @@ The Authentication API must also be available for authenticated routes to work.
 
 **1. Clone the repository:**
 
-  git clone https://github.com/T-Quaresma/agenda-compartilhada-backend
+  git clone https://github.com/T-Quaresma/agenda-compartilhada-backend/tree/mvp3
 
 **2. Enter the project directory:**
 
