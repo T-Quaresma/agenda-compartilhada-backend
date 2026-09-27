@@ -178,13 +178,14 @@ Docker Desktop must be installed and running.
 
 The Authentication API must also be available for authenticated routes to work.
 
-**1. Clone the repository:**
+**1. Clone the repository you will be using the MVP3 branch:**
 
-  git clone https://github.com/T-Quaresma/agenda-compartilhada-backend/tree/mvp3
+  git clone https://github.com/T-Quaresma/agenda-compartilhada-backend
 
-**2. Enter the project directory:**
+**2. Enter the project directory and switch to the MVP3 branch:**
 
   cd agenda-compartilhada-backend
+  git switch mvp3
 
 **3. Build the Docker image:**
 
@@ -208,12 +209,16 @@ This volume keeps the SQLite database even if the Principal API container is sto
 
 Using Git Bash on Windows:
 
-  MSYS_NO_PATHCONV=1 docker run -d --name sharp-principal \
-    --network sharp-network \
-    -p 5000:5000 \
-    -e AUTH_API_URL=http://sharp-auth:5001 \
-    -v sharp-database:/app/instance \
-    sharp-principal
+docker run -d --name sharp-principal \
+  --network sharp-network \
+  -p 5000:5000 \
+  -e AUTH_API_URL=http://sharp-auth:5001 \
+  -v sharp-database:/app/instance \
+  sharp-principal
+
+or
+
+ docker run -d --name sharp-principal --network sharp-network -p 5000:5000 -e AUTH_API_URL=http://sharp-auth:5001 -v sharp-database:/app/instance sharp-principal     
 
 **The parameters used in this command are:**
 
@@ -234,7 +239,7 @@ Stores the SQLite database inside the persistent Docker volume.
 
 **The Principal API will be available at:**
 
-  http://localhost:5000
+5000
 
 **Swagger documentation will be available at:**
 
